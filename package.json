@@ -1,0 +1,48 @@
+{
+  "name": "instagram-manager",
+  "version": "0.1.2",
+  "private": true,
+  "description": "Local-first Instagram content manager for Windows",
+  "main": "src/main/index.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "build:dir": "electron-builder --dir --win",
+    "build:win": "electron-builder --win nsis portable"
+  },
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "electron-updater": "^6.8.9",
+    "sql.js": "^1.13.0"
+  },
+  "devDependencies": {
+    "electron": "^37.2.6",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "sk.codex.instagrammanager",
+    "productName": "Instagram Manager",
+    "asar": true,
+    "directories": { "output": "dist" },
+    "files": ["src/**/*", "package.json", "node_modules/sql.js/**/*", "node_modules/chokidar/**/*"],
+    "win": {
+      "target": ["nsis", "portable"],
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "artifactName": "Instagram-Manager-Setup-${version}.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "portable": {
+      "artifactName": "Instagram-Manager-Portable-${version}-${arch}.${ext}"
+    },
+    "publish": [{
+      "provider": "github",
+      "owner": "${env.GH_RELEASE_OWNER}",
+      "repo": "${env.GH_RELEASE_REPO}"
+    }]
+  }
+}

@@ -1,0 +1,49 @@
+:root {
+  --bg: #100f13;
+  --panel: #18161b;
+  --panel-2: #211e24;
+  --line: #342e37;
+  --muted: #99909b;
+  --mint: #e1306c;
+  --mint-dark: #492034;
+  --orange: #fcaf45;
+  --red: #ed4956;
+  --blue: #5967df;
+  --brand-gradient: linear-gradient(115deg, #feda75 0%, #fa7e1e 25%, #d62976 55%, #962fbf 78%, #4f5bd5 100%);
+}
+
+.sidebar { background: #141217; }
+.topbar { background: #151318; }
+.brand-mark {
+  background: var(--brand-gradient);
+  color: #fff;
+  box-shadow: 0 3px 12px #d6297633;
+}
+.nav-item:hover { background: #231b22; }
+.nav-item.active { background: #35202c; color: #ffd5e5; }
+.account-avatar, .avatar-small {
+  background: linear-gradient(135deg, #55213c, #38233c);
+  color: #ffbd79;
+}
+.mode-badge { color: #ff9abd; border-color: #713450; }
+.mode-badge.production { color: #ffc37e; border-color: #775232; }
+.quiet-button:hover { background: #282129; }
+.button {
+  background: var(--brand-gradient);
+  color: #fff;
+  box-shadow: 0 2px 12px #d6297622;
+}
+.button:hover { filter: brightness(1.1); }
+.button.secondary { background: #252129; color: #e6dfe8; border-color: var(--line); box-shadow: none; }
+.button.secondary:hover { background: #302833; }
+.post-meta { color: #fa7e1e; }
+.small-button:hover { color: #ff9abd; border-color: #a74368; }
+.filter-chip.active { color: #ffb4d0; border-color: #91385b; background: #321d2a; }
+.field input:focus, .field textarea:focus, .field select:focus { border-color: #d62976; }
+.settings-tab.active { background: #35202c; color: #ffb4d0; }
+.switch:checked { background: #d62976; }
+.calendar-event.scheduled { background: #292842; color: #bdc5ff; }
+.toast { background: #30202a; color: #ffe2ed; border-color: #81405e; }
+.update-status-row { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:38px; color:#ddd5df; font-size:13px; }
+.update-progress-track { height:5px; overflow:hidden; background:#342e37; border-radius:3px; }
+.update-progress-value { height:100%; background:var(--brand-gradient); transition:width .2s ease; }

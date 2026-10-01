@@ -1,0 +1,57 @@
+name: Build and publish Windows release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Configure release metadata
+        shell: pwsh
+        run: |
+          $parts = $env:GITHUB_REPOSITORY.Split('/')
+          "GH_RELEASE_OWNER=$($parts[0])" >> $env:GITHUB_ENV
+          "GH_RELEASE_REPO=$($parts[1])" >> $env:GITHUB_ENV
+
+      - name: Build installer and update metadata
+        run: pnpm exec electron-builder --win nsis --publish never
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $assets = Get-ChildItem dist -File | Where-Object {
+            $_.Name -eq 'latest.yml' -or
+            $_.Name -match '^Instagram-Manager-Setup-.*\.exe(\.blockmap)?$'
+          }
+          if (-not ($assets | Where-Object Name -eq 'latest.yml')) {
+            throw 'electron-builder did not produce dist/latest.yml'
+          }
+          gh release create $env:GITHUB_REF_NAME $assets.FullName --title $env:GITHUB_REF_NAME --generate-notes

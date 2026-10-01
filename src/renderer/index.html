@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none';">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Manager</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./instagram-brand.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">I</span><span>Instagram<br><b>Manager</b></span></div>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav id="navigation"></nav>
+      <div class="sidebar-bottom"><div class="account-avatar">IG</div><div class="account-copy"><strong>Single account</strong><small id="sidebar-account">Disconnected</small></div><button class="icon-button" data-page="settings" title="Settings">⚙</button></div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar"><div><span class="crumb">Workspace</span><span class="crumb-sep">/</span><strong id="page-title">Dashboard</strong></div><div class="top-actions"><span id="mode-badge" class="mode-badge">DEVELOPMENT MODE</span><button id="pause-button" class="quiet-button">Pause automation</button><div class="avatar-small">IG</div></div></header>
+      <section id="page" class="page"></section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <dialog id="post-dialog" class="dialog"></dialog>
+</body>
+</html>
